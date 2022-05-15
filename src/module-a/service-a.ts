@@ -1,9 +1,12 @@
-import { Injectable } from "@nestjs/common";
+import { forwardRef, Inject, Injectable } from "@nestjs/common";
 import { ServiceB } from "../module-b";
 
 @Injectable()
 export class ServiceA {
-	constructor(private serviceB: ServiceB){
+	constructor(
+		@Inject(forwardRef(() => ServiceB))
+		private serviceB: ServiceB
+	){
 		this.serviceB.helloB();
 	}
 
